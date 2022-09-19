@@ -1,0 +1,29 @@
+openapi: "3.0.1"
+info:
+  title: "sample_api"
+  version: "2020-09-09T06:11:13Z"
+paths:
+  /blogs/{blogId}:
+    get:
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            schema:
+              $ref: "#/definitions/blog"
+        requestTemplates:
+          application/json: "{\"statusCode\": 200}"
+        passthroughBehavior: "when_no_match"
+        type: "mock"
+
+definitions:
+  blog:
+    title: "blog title"
+    content: "blog content"
