@@ -15,9 +15,9 @@ def lambda_handler(event, context):
     host = os.environ["SPICE_DB_HOST"]
     port = os.environ["SPICE_DB_PORT"]
     secret = os.environ["SPICE_DB_PRESHARED_KEY"]
+    authorizer = Authorizer(host, port, secret)
 
     token = json.loads(event['authorizationToken'])
-    authorizer = Authorizer(host, port, secret)
 
     object = AuthzObject(event["resource"], event["path"])
     subject = AuthzObject("user", token["sub"])
