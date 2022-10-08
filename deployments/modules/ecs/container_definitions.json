@@ -1,0 +1,12 @@
+{
+  "name": "spicedb",
+  "image": "authzed/spicedb",
+  "essential": true,
+  "portMappings": [
+    {
+      "protocol": "tcp",
+      "containerPort": 50051,
+      "hostPort": 80
+    }
+  ]
+}
