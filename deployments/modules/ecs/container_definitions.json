@@ -1,12 +1,25 @@
-{
-  "name": "spicedb",
-  "image": "authzed/spicedb",
-  "essential": true,
-  "portMappings": [
-    {
-      "protocol": "tcp",
-      "containerPort": 50051,
-      "hostPort": 80
-    }
-  ]
-}
+[
+  {
+    "name": "spicedb",
+    "image": "authzed/spicedb",
+    "essential": true,
+    "command": ["serve"],
+    "environment": [
+      { "name": "SPICEDB_GRPC_PRESHARED_KEY", "value": "test" }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "ecs",
+        "awslogs-group": "/ecs/spicedb"
+      }
+    },    
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 50051
+      }
+    ]
+  }
+]
