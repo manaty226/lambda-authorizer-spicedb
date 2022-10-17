@@ -130,3 +130,9 @@ dmypy.json
 
 # terraform
 .terraform*
+
+# zip
+*.zip
+
+# python layer
+*/layer/python/*
