@@ -135,4 +135,4 @@ dmypy.json
 *.zip
 
 # python layer
-*/layer/python/*
+*/layer/python/
