@@ -14,12 +14,17 @@ module "vpc" {
   source = "./modules/vpc"
 }
 
-module "api" {
-  source = "./modules/api"
+module "lambda" {
+  source = "./modules/lambda"
   subnet_id = module.vpc.private_subnet_ids[0]
   security_group_id = module.vpc.security_group_id
   alb_host = module.spicedb.lb_dns
   acm_certificate_arn = module.acm.acm_certificate_arn
+}
+
+module "api" {
+  source = "./modules/api"
+  authorizer_invoke_arn = module.lambda.authorizer_invoke_arn
 }
 
 module "spicedb" {
