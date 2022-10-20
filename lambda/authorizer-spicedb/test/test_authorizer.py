@@ -33,9 +33,7 @@ def return_val(is_allowed: boolean):
   [
     (
       {
-        "authorizationToken": json.dumps({
-          "sub": ""
-        }),
+        "authorizationToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlRhcm8iLCJpYXQiOjE1MTYyMzkwMjJ9.mIFsjmgmsMNA6gVk3q6iuNJTAFvVmlSVsjVh5MQ4cIg",
         "methodArn": "",
         "resource": "",
         "path": "",
