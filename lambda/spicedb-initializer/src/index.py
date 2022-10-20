@@ -2,8 +2,6 @@ import json
 import os
 import boto3
 from logging import getLogger, INFO
-from src.authorizer import Authorizer
-from src.object import AuthzObject
 from authzed.api.v1 import (
     Client,
     WriteSchemaRequest,
