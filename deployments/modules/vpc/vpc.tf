@@ -119,33 +119,6 @@ resource "aws_security_group_rule" "ecs" {
   security_group_id = aws_security_group.ecs.id
 }
 
-# resource "aws_service_discovery_private_dns_namespace" "spicedb_internal" {
-#   name        = "spicedb.internal"
-#   description = "spicedb"
-#   vpc         = aws_vpc.spice_vpc.id
-# }
-
-# resource "aws_service_discovery_service" "spicedb" {
-#   name = "spicedb"
-
-#   dns_config {
-#     namespace_id = "${aws_service_discovery_private_dns_namespace.spicedb_internal.id}"
-
-#     dns_records {
-#       ttl  = 10
-#       type = "A"
-#     }
-
-#     routing_policy = "MULTIVALUE"
-#   }
-
-#   health_check_custom_config {
-#     failure_threshold = 1
-#   }
-# }
-
 output "vpc_id" { value = aws_vpc.spice_vpc.id }
-# output "alb_arn" { value = aws_lb.internal_alb.arn }
 output "security_group_id" { value = aws_security_group.ecs.id }
 output "private_subnet_ids" { value = [aws_subnet.private_1a.id, aws_subnet.private_1c.id] }
-# output "service_discovery_arn" { value = aws_service_discovery_service.spicedb.arn }

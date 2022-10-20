@@ -1,9 +1,7 @@
-# variable alb_arn {}
 variable acm_certificate_arn {}
 variable security_group_id {}
 variable subnet_ids {}
 variable vpc_id {}
-# variable service_discovery_arn {}
 
 resource "aws_iam_role" "ecs_task_execution_role" {
   name               = "ecs_task_execution_role"

@@ -5,9 +5,6 @@ provider "aws" {
 
 module "acm" {
   source = "./modules/acm"
-  # server_private_key_pem = module.certificate.server_private_key
-  # server_crt_pem = module.certificate.server_crt_pem
-  # root_crt_pem = module.certificate.root_crt_pem
 }
 
 module "vpc" {
@@ -31,9 +28,7 @@ module "spicedb" {
   source = "./modules/ecs"
   
   acm_certificate_arn = module.acm.acm_certificate_arn
-  # alb_arn = module.vpc.alb_arn
   subnet_ids = module.vpc.private_subnet_ids
   security_group_id = module.vpc.security_group_id
   vpc_id = module.vpc.vpc_id
-  # service_discovery_arn = module.vpc.service_discovery_arn
 }

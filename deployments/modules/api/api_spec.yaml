@@ -2,28 +2,48 @@ openapi: "3.0.1"
 info:
   title: "sample_api"
   version: "2020-09-09T06:11:13Z"
+servers:
+- url: "https://40oe14pnf8.execute-api.ap-northeast-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "/prod"
 paths:
   /blogs/{blogId}:
     get:
+      parameters:
+      - name: "blogId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
       responses:
-        200:
+        "200":
           description: "200 response"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
+          content: {}
+      security:
+      - spicedb-authorizer: []
       x-amazon-apigateway-integration:
         responses:
           default:
             statusCode: "200"
-            schema:
-              $ref: "#/definitions/blog"
+            responseTemplates:
+              application/json: "{\n \"title\": \"test blog\",\n \"content\": \"This\
+                \ is test blog\"\n }"
         requestTemplates:
           application/json: "{\"statusCode\": 200}"
         passthroughBehavior: "when_no_match"
         type: "mock"
 
-definitions:
-  blog:
-    title: "blog title"
-    content: "blog content"
+components:
+  securitySchemes:
+    spicedb-authorizer:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "custom"
+      x-amazon-apigateway-authorizer:
+        authorizerUri: ${authorizer_uri}
+        authorizerCredentials: ${authorizer_credentials}
+        authorizerResultTtlInSeconds: 300
+        identitySource: "method.request.header.Authorization"
+        type: "request"
