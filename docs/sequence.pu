@@ -1,0 +1,22 @@
+@startuml
+
+actor Client
+participant "API Gateway" as api
+participant "Lambda Authorizer" as authz
+participant SpiceDB as spice
+
+Client -> api: APIアクセス w/ JWT
+api -> authz: Lambda Authorizerの実行
+authz -> spice: SpiceDBにパーミッションチェック
+
+alt 認可OKの場合
+  authz <- spice: パーミッションチェックOKで応答
+  api <- authz: 認可OKで返却
+  Client <- api: ステータスコード200で応答
+else 認可NGの場合
+  authz <- spice: パーミッションチェックNGで応答
+  api <- authz: 認可NGで返却
+  Client <- api: ステータスコード403で応答
+end
+
+@enduml
